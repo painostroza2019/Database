@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Datos de QMUV</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 { font-size: 20px; color: #3B57A4; }
+    p { margin: 6px 0; }
+    .error { color: red; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="card" id="contenido">
+    <h1>Buscando dispositivo...</h1>
+  </div>
+
+  <script>
+    // Diccionario de datos por número de serie
+    const datosDispositivos = {
+"QM0325N1-001": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-001"
+    },
+"QM0325N1-002": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-002"
+    },
+"QM0325N1-003": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-003"
+    },
+"QM0325N1-004": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-004"
+    },
+"QM0325N1-005": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-005"
+    },
+"QM0325N1-006": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-006"
+    },
+"QM0325N1-007": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-007"
+    },
+"QM0325N1-008": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-008"
+    },
+"QM0325N1-009": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-009"
+    },
+"QM0325N1-010": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-010"
+    },
+"QM0325N1-011": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-011"
+    },
+"QM0325N1-012": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-012"
+    },
+"QM0325N1-013": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-013"
+    },
+"QM0325N1-014": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-014"
+    },
+"QM0325N1-015": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-015"
+    },
+"QM0325N1-016": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-016"
+    },
+"QM0325N1-017": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-017"
+    },
+"QM0325N1-018": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-018"
+    },
+"QM0325N1-019": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-019"
+    },
+"QM0325N1-020": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-020"
+    },
+"QM0325N1-021": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-021"
+    },
+"QM0325N1-022": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-022"
+    },
+"QM0325N1-023": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-023"
+    },
+"QM0325N1-024": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-024"
+    },
+"QM0325N1-025": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-025"
+    },
+"QM0325N1-026": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-026"
+    },
+"QM0325N1-027": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-027"
+    },
+"QM0325N1-028": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-028"
+    },
+"QM0325N1-029": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-029"
+    },
+"QM0325N1-030": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-030"
+    },
+"QM0325N1-031": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-031"
+    },
+"QM0325N1-032": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-032"
+    },
+"QM0325N1-033": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-033"
+    },
+"QM0325N1-034": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-034"
+    },
+"QM0325N1-035": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-035"
+    },
+"QM0325N1-036": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-036"
+    },
+"QM0325N1-037": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-037"
+    },
+"QM0325N1-038": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-038"
+    },
+"QM0325N1-039": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-039"
+    },
+"QM0325N1-040": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-040"
+    },
+"QM0325N1-041": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-041"
+    },
+"QM0325N1-042": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-042"
+    },
+"QM0325N1-043": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-043"
+    },
+"QM0325N1-044": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-044"
+    },
+"QM0325N1-045": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-045"
+    },
+"QM0325N1-046": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-046"
+    },
+"QM0325N1-047": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-047"
+    },
+"QM0325N1-048": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-048"
+    },
+"QM0325N1-049": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-049"
+    },
+"QM0325N1-050": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-050"
+    },
+"QM0325N1-051": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-051"
+    },
+"QM0325N1-052": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-052"
+    },
+"QM0325N1-053": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-053"
+    },
+"QM0325N1-054": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-054"
+    },
+"QM0325N1-055": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-055"
+    },
+"QM0325N1-056": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-056"
+    },
+"QM0325N1-057": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-057"
+    },
+"QM0325N1-058": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-058"
+    },
+"QM0325N1-059": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-059"
+    },
+"QM0325N1-060": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-060"
+    },
+"QM0325N1-061": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-061"
+    },
+"QM0325N1-062": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-062"
+    },
+"QM0325N1-063": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-063"
+    },
+"QM0325N1-064": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-064"
+    },
+"QM0325N1-065": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-065"
+    },
+"QM0325N1-066": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-066"
+    },
+"QM0325N1-067": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-067"
+    },
+"QM0325N1-068": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-068"
+    },
+"QM0325N1-069": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-069"
+    },
+"QM0325N1-070": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-070"
+    },
+"QM0325N1-071": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-071"
+    },
+"QM0325N1-072": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-072"
+    },
+"QM0325N1-073": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-073"
+    },
+"QM0325N1-074": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-074"
+    },
+"QM0325N1-075": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-075"
+    },
+"QM0325N1-076": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-076"
+    },
+"QM0325N1-077": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-077"
+    },
+"QM0325N1-078": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-078"
+    },
+"QM0325N1-079": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-079"
+    },
+"QM0325N1-080": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-080"
+    },
+"QM0325N1-081": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-081"
+    },
+"QM0325N1-082": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-082"
+    },
+"QM0325N1-083": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-083"
+    },
+"QM0325N1-084": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-084"
+    },
+"QM0325N1-085": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-085"
+    },
+"QM0325N1-086": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-086"
+    },
+"QM0325N1-087": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-087"
+    },
+"QM0325N1-088": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-088"
+    },
+"QM0325N1-089": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-089"
+    },
+"QM0325N1-090": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-090"
+    },
+"QM0325N1-091": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-091"
+    },
+"QM0325N1-092": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-092"
+    },
+"QM0325N1-093": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-093"
+    },
+"QM0325N1-094": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-094"
+    },
+"QM0325N1-095": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-095"
+    },
+"QM0325N1-096": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-096"
+    },
+"QM0325N1-097": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-097"
+    },
+"QM0325N1-098": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-098"
+    },
+"QM0325N1-099": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-099"
+    },
+"QM0325N1-100": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QMUV-100"
+    }
+};
+
+    // Obtener parámetro sn de la URL
+    const params = new URLSearchParams(window.location.search);
+    const sn = params.get("sn");
+    const contenido = document.getElementById("contenido");
+
+    if (sn && datosDispositivos[sn]) {
+      const d = datosDispositivos[sn];
+      contenido.innerHTML = `
+        <h1>Datos del Fabricante</h1>
+        <p><strong>Nombre:</strong> ${d.nombre}</p>
+        <p><strong>Número de serie:</strong> ${sn}</p>
+        <p><strong>Fabricante:</strong> ${d.fabricante}</p>
+        <p><strong>Dirección:</strong> ${d.direccion}</p>
+        <p><strong>Correo:</strong> ${d.correo}</p>
+        <p><strong>Fecha de fabricación:</strong> ${d.fecha}</p>
+      `;
+    } else {
+      contenido.innerHTML = `
+        <h1 class="error">Dispositivo no encontrado</h1>
+        <p class="error">Verifica que el número de serie esté escrito correctamente en el enlace.</p>
+      `;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Datos de QStep</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 { font-size: 20px; color: #2c3e50; }
+    p { margin: 6px 0; }
+    .error { color: red; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="card" id="contenido">
+    <h1>Buscando dispositivo...</h1>
+  </div>
+
+  <script>
+    // Diccionario de datos por número de serie
+    const datosDispositivos = {
+"QS0325N1-001": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-001"
+    },
+"QS0325N1-002": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-002"
+    },
+"QS0325N1-003": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-003"
+    },
+"QS0325N1-004": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-004"
+    },
+"QS0325N1-005": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-005"
+    },
+"QS0325N1-006": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-006"
+    },
+"QS0325N1-007": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-007"
+    },
+"QS0325N1-008": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-008"
+    },
+"QS0325N1-009": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-009"
+    },
+"QS0325N1-010": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-010"
+    },
+"QS0325N1-011": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-011"
+    },
+"QS0325N1-012": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-012"
+    },
+"QS0325N1-013": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-013"
+    },
+"QS0325N1-014": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-014"
+    },
+"QS0325N1-015": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-015"
+    },
+"QS0325N1-016": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-016"
+    },
+"QS0325N1-017": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-017"
+    },
+"QS0325N1-018": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-018"
+    },
+"QS0325N1-019": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-019"
+    },
+"QS0325N1-020": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-020"
+    },
+"QS0325N1-021": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-021"
+    },
+"QS0325N1-022": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-022"
+    },
+"QS0325N1-023": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-023"
+    },
+"QS0325N1-024": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-024"
+    },
+"QS0325N1-025": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-025"
+    },
+"QS0325N1-026": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-026"
+    },
+"QS0325N1-027": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-027"
+    },
+"QS0325N1-028": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-028"
+    },
+"QS0325N1-029": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-029"
+    },
+"QS0325N1-030": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-030"
+    },
+"QS0325N1-031": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-031"
+    },
+"QS0325N1-032": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-032"
+    },
+"QS0325N1-033": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-033"
+    },
+"QS0325N1-034": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-034"
+    },
+"QS0325N1-035": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-035"
+    },
+"QS0325N1-036": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-036"
+    },
+"QS0325N1-037": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-037"
+    },
+"QS0325N1-038": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-038"
+    },
+"QS0325N1-039": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-039"
+    },
+"QS0325N1-040": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-040"
+    },
+"QS0325N1-041": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-041"
+    },
+"QS0325N1-042": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-042"
+    },
+"QS0325N1-043": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-043"
+    },
+"QS0325N1-044": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-044"
+    },
+"QS0325N1-045": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-045"
+    },
+"QS0325N1-046": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-046"
+    },
+"QS0325N1-047": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-047"
+    },
+"QS0325N1-048": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-048"
+    },
+"QS0325N1-049": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-049"
+    },
+"QS0325N1-050": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-050"
+    },
+"QS0325N1-051": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-051"
+    },
+"QS0325N1-052": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-052"
+    },
+"QS0325N1-053": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-053"
+    },
+"QS0325N1-054": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-054"
+    },
+"QS0325N1-055": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-055"
+    },
+"QS0325N1-056": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-056"
+    },
+"QS0325N1-057": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-057"
+    },
+"QS0325N1-058": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-058"
+    },
+"QS0325N1-059": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-059"
+    },
+"QS0325N1-060": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-060"
+    },
+"QS0325N1-061": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-061"
+    },
+"QS0325N1-062": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-062"
+    },
+"QS0325N1-063": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-063"
+    },
+"QS0325N1-064": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-064"
+    },
+"QS0325N1-065": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-065"
+    },
+"QS0325N1-066": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-066"
+    },
+"QS0325N1-067": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-067"
+    },
+"QS0325N1-068": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-068"
+    },
+"QS0325N1-069": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-069"
+    },
+"QS0325N1-070": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-070"
+    },
+"QS0325N1-071": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-071"
+    },
+"QS0325N1-072": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-072"
+    },
+"QS0325N1-073": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-073"
+    },
+"QS0325N1-074": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-074"
+    },
+"QS0325N1-075": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-075"
+    },
+"QS0325N1-076": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-076"
+    },
+"QS0325N1-077": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-077"
+    },
+"QS0325N1-078": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-078"
+    },
+"QS0325N1-079": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-079"
+    },
+"QS0325N1-080": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-080"
+    },
+"QS0325N1-081": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-081"
+    },
+"QS0325N1-082": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-082"
+    },
+"QS0325N1-083": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-083"
+    },
+"QS0325N1-084": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-084"
+    },
+"QS0325N1-085": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-085"
+    },
+"QS0325N1-086": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-086"
+    },
+"QS0325N1-087": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-087"
+    },
+"QS0325N1-088": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-088"
+    },
+"QS0325N1-089": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-089"
+    },
+"QS0325N1-090": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-090"
+    },
+"QS0325N1-091": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-091"
+    },
+"QS0325N1-092": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-092"
+    },
+"QS0325N1-093": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-093"
+    },
+"QS0325N1-094": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-094"
+    },
+"QS0325N1-095": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-095"
+    },
+"QS0325N1-096": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-096"
+    },
+"QS0325N1-097": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-097"
+    },
+"QS0325N1-098": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-098"
+    },
+"QS0325N1-099": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-099"
+    },
+"QS0325N1-100": {
+        fabricante: "Neurotech SPA",
+        direccion: "Victoria 1260, Concepción, Chile",
+        correo: "soporte@neurotech.cl",
+        fecha: "2025-03",
+        nombre: "QStep-100"
+    }
+};
+
+    // Obtener parámetro sn de la URL
+    const params = new URLSearchParams(window.location.search);
+    const sn = params.get("sn");
+    const contenido = document.getElementById("contenido");
+
+    if (sn && datosDispositivos[sn]) {
+      const d = datosDispositivos[sn];
+      contenido.innerHTML = `
+        <h1>Datos del Fabricante</h1>
+        <p><strong>Nombre:</strong> ${d.nombre}</p>
+        <p><strong>Número de serie:</strong> ${sn}</p>
+        <p><strong>Fabricante:</strong> ${d.fabricante}</p>
+        <p><strong>Dirección:</strong> ${d.direccion}</p>
+        <p><strong>Correo:</strong> ${d.correo}</p>
+        <p><strong>Fecha de fabricación:</strong> ${d.fecha}</p>
+      `;
+    } else {
+      contenido.innerHTML = `
+        <h1 class="error">Dispositivo no encontrado</h1>
+        <p class="error">Verifica que el número de serie esté escrito correctamente en el enlace.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
